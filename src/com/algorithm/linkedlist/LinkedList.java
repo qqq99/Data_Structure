@@ -2,9 +2,7 @@ package com.algorithm.linkedlist;
 import java.util.NoSuchElementException;
 
 public class LinkedList {
-    //no where else in the program can access Node class
     private class Node {
-        //access anywhere inside LinkedList
         private int value;
         //keep a reference to the next node;
         private Node next;
@@ -18,13 +16,12 @@ public class LinkedList {
     private int size;
 
     public void addLast(int item) {
-        //wrap this integer inside a node object;
-        //Node node = new Node(); use var比较方便
-        var node = new Node(item);
+        Node node = new Node(item);
         //check if the LinkedList is empty or not
         if (isEmpty())
             first = last = node;
         else{
+            //keep reference
             last.next = node;
             last = node;
         }
@@ -123,6 +120,7 @@ public class LinkedList {
         }
         return array;
     }
+
     public void reverse(){
         if(isEmpty()) return;
         //[10 -> 20 -> 30]
@@ -130,11 +128,11 @@ public class LinkedList {
         var previous = first;
         var current = first.next;
         while(current != null){
-            var next = current.next;
+            var temp = current.next;
             current.next = previous;
             //if you set: next.next = current;then you will lose next.next所以每次只改一个箭头
             previous = current;
-            current = next;
+            current = temp;
         }
         //set first,last field
         last = first;
